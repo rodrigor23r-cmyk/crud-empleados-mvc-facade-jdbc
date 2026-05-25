@@ -34,6 +34,8 @@ realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los datos.
  6.- etc...  -->
 
 	<h1>Bienvenido a la aplicación de gestión de empleados</h1>
-	
+	<div>
+		<a href="MainController">Mostrar Listado de Empleados</a>
+	</div>
 </body>
 </html>
