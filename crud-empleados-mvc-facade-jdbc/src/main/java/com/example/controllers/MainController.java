@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import com.example.services.EmpleadoService;
 import com.example.services.EmpleadoServiceImpl;
@@ -16,7 +18,7 @@ import com.example.services.EmpleadoServiceImpl;
 @WebServlet("/MainController")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private static final Logger LOG = Logger.getLogger("MainController");
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,7 +37,22 @@ public class MainController extends HttpServlet {
 		
 		// comprobar si se hace la conexión
 		EmpleadoService empleadoService = new EmpleadoServiceImpl();
-		empleadoService.isConnected();
+		
+		boolean resultadoConexion = false;
+		
+		try {
+			resultadoConexion = empleadoService.isConnected();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (resultadoConexion) {
+			LOG.info("Conexión exitosa BRAVO! desde el controlador");
+		}	else {
+			LOG.info("La conexión ha fallado, desde el controlador!");
+		}
+		
 	}
 
 	/**
