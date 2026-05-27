@@ -14,7 +14,7 @@ import com.example.models.Genero;
 public class EmpleadoServiceImpl implements EmpleadoService {
 
 	private static final Logger LOG = Logger.getLogger("EmpleadoServiceImpl");
-	
+	/*
 	@Override
 	public boolean isConnected() throws Exception {
 		
@@ -39,7 +39,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 		
 		return conexionOK;
 	}
-
+*/
 	@Override
 	public List<Empleado> getEmpleados() {
 		
