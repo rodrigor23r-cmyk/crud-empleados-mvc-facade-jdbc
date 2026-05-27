@@ -2,7 +2,9 @@ package com.example.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -61,6 +63,27 @@ public class DBConexion implements AutoCloseable {
 		
 	}
 	
+	// Método que recupera todos los registros de la tabla empleados.
+	public ResultSet getEmpleados (Connection connection) {
+		
+		String query = "SELECT * FROM `empresa-crud-empleados`.empleados";
+		
+		ResultSet rs = null;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = connection.createStatement();
+			
+			rs = stmt.executeQuery(query);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+		return rs;
+	}
 	
 	
 }
