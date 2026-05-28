@@ -10,7 +10,7 @@ public interface EmpleadoService {
 
 	
 	// Método para comprobar la conexión a la base de datos
-	// _______________podemos quitar public abstract_______________
+	// _______________podemos quitar "public abstract" _______________
 	// public abstract boolean isConnected() throws SQLException, Exception;
 	
 	public abstract List<Empleado> getEmpleados();
