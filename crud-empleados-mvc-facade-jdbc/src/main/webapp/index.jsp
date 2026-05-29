@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Empresa</title>
 </head>
 <body>
 <!-- 	El patron MVC (Modelo-Vista-Controlador) es una arquitectura de software que
