@@ -7,6 +7,9 @@
 <html>
 <head>
 	<style>
+		.formulario {
+			max-width: 500px;
+		}
         .input-grande {
             width: 100%;         /* Se adapta al ancho de la pantalla */
         }
@@ -18,10 +21,10 @@
 
 <body>
 	<h1>Formulario de Alta/Modificación de empleado</h1>
-	<fieldset>
+	<fieldset class="formulario">
 
 		<legend>Formulario de Gestión de Empleado</legend>
-		<form action="#" method="post">
+		<form action="AltaController" method="post">
 			<div><label for="nombre">Nombre: </label><input type="text" id="nombre" name="nombre" required placeholder="introducir nombre"></div><br>
 			<div><label for="primerApellido">Primer Apellido: </label><input type="text" id="primerApellido" name="primerApellido" required placeholder="introducir primer apellido"></div><br>
 			<div><label for="segundoApellido">Segundo Apellido: </label><input type="text" id="segundoApellido" name="segundoApellido" placeholder="introducir segundo apellido"></div><br>
