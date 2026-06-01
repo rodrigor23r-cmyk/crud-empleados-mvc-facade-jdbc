@@ -14,4 +14,5 @@ public interface EmpleadoService {
 	// public abstract boolean isConnected() throws SQLException, Exception;
 	
 	public abstract List<Empleado> getEmpleados();
+	public abstract void altaEmpleado(Empleado empleado, List<String> direccionesCorreo, List<String> numerosTelefono) throws Exception;
 }

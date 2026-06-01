@@ -11,35 +11,11 @@ import com.example.dao.DBConexion;
 import com.example.models.Empleado;
 import com.example.models.Genero;
 
-public class EmpleadoServiceImpl implements EmpleadoService {
+public class EmpleadoServiceImpl implements EmpleadoService  {
 
 	private static final Logger LOG = Logger.getLogger("EmpleadoServiceImpl");
-	/*
-	@Override
-	public boolean isConnected() throws Exception {
-		
-		// Conectar con la capa DAO
-		
-		
-		//Para cerrar la conexión
-		boolean conexionOK = false;
-		
-		
-		try (DBConexion dbConexion = new DBConexion("root", "Temp2026");
-				Connection conn = dbConexion.getConexion();) {
-			
-			if (conn != null) {
-				conexionOK = true;
-			}
-		
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		return conexionOK;
-	}
-*/
+
+	
 	@Override
 	public List<Empleado> getEmpleados() {
 		
@@ -67,12 +43,25 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 		} catch (Exception e) {
 			// TODO: handle exception
 			LOG.severe("!!error al recuperar los empleados desde el servicio!!" + e.getMessage());
-
+			e.printStackTrace();
 		}
-		
-		
 		
 		return empleados;
 	}
-
+	
+	
+	@Override
+	public void altaEmpleado(Empleado empleado, List<String> direccionesCorreo, List<String> numerosTelefono) {
+		
+		try (DBConexion dbConexion = new DBConexion("root", "Temp2026");
+				Connection connection = dbConexion.getConexion();) {
+			
+			dbConexion.altaEmpleado(empleado, direccionesCorreo, numerosTelefono, connection);
+			
+		} catch (Exception e) {
+			LOG.severe("!!error al dar de alta el empleado desde el servicio!! " + e.getMessage());
+		}
+		
+	}
+	
 }

@@ -19,6 +19,8 @@ import com.example.models.Empleado;
 import com.example.models.Genero;
 import com.example.services.DepartamentoService;
 import com.example.services.DepartamentoServiceImpl;
+import com.example.services.EmpleadoService;
+import com.example.services.EmpleadoServiceImpl;
 
 /**
  * Servlet implementation class AltaController
@@ -97,7 +99,24 @@ public class AltaController extends HttpServlet {
 				.salario(salario) 
 				.departamentos_id(departamentos_id)
 				.build();
+	
 		
+		// llamar a la capa de servicios para que llame a DAO para insertar el nuevo empleado
+		
+		EmpleadoService empleadoService = new EmpleadoServiceImpl();
+		
+		try {
+			empleadoService.altaEmpleado(empleado, direccionesCorreo, numerosTelefono);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// como se va a redirigir a la vista del listado de empleados, se recupera el listado actualizado de 
+		// empleados para mostrarlo en la vista.
+		List<Empleado> empleados = empleadoService.getEmpleados();
+		request.setAttribute("empleados", empleados);
+		
+		request.getRequestDispatcher("views/listadoEmpleados.jsp").forward(request, response);
 	}
 
 }
