@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +44,7 @@
 				<th>Fecha de alta</th>
 				<th>Genero</th>
 				<th>Salario</th>
+				<th>Detalles</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -55,6 +57,7 @@
             <td><%= empleado.fechaAlta() %></td>
             <td><%= empleado.genero() %></td>
             <td><%= String.format("%.2f", empleado.salario()) %></td>
+            <td><a href="DetallesController?idEmpleado=<%=empleado.id()%>">Detalles</a></td>
                 </tr>
           <% } %>
           <!--  tr>td{<=empleado.() %>}*6 -->

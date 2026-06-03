@@ -4,6 +4,7 @@ package com.example.services;
 // import java.sql.SQLException;
 import java.util.List;
 
+import com.example.models.DetallesEmpleado;
 import com.example.models.Empleado;
 
 public interface EmpleadoService {
@@ -15,4 +16,5 @@ public interface EmpleadoService {
 	
 	public abstract List<Empleado> getEmpleados();
 	public abstract void altaEmpleado(Empleado empleado, List<String> direccionesCorreo, List<String> numerosTelefono) throws Exception;
+	public abstract DetallesEmpleado getDetallesEmpleado(int idEmpleado);
 }

@@ -192,4 +192,29 @@ public class DBConexion implements AutoCloseable {
 		
 	}
 	
+	public ResultSet detallesEmpleado(int idEmpleado, Connection connection) {
+		
+		ResultSet rs = null;
+		
+		String query = "SELECT d.nombre, t.numero, c.email "
+				+ "FROM empleados e "
+				+ "LEFT JOIN departamentos d ON e.departamentos_id = d.id "
+				+ "LEFT JOIN correos c ON c.empleados_id = e.id "
+				+ "LEFT JOIN telefonos t ON t.empleados_id = e.id "
+				+ "WHERE e.id = ?";
+		
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = connection.prepareStatement(query);
+			stmt.setInt(1, idEmpleado);
+			rs = stmt.executeQuery();
+			
+		} catch (SQLException e) {
+			LOG.severe("Error preparando la consulta de detalles de empleado porque: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 }
