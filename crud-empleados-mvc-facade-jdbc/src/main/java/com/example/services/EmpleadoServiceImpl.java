@@ -88,9 +88,18 @@ public class EmpleadoServiceImpl implements EmpleadoService  {
 					nombreDpto = rs.getString("nombre");
 			}
 			
+			rs.beforeFirst();
+			
+			while (rs.next()) {
+					
+					numerosTelefono.add(rs.getString("numero"));	
+			}
+			
+			rs.beforeFirst();
+			
 			while (rs.next()) {
 					direccionesCorreo.add(rs.getString("email"));
-					numerosTelefono.add(rs.getString("numero"));	
+				
 			}
 			
 			detallesEmpleado = new DetallesEmpleado(nombreDpto, direccionesCorreo, numerosTelefono);

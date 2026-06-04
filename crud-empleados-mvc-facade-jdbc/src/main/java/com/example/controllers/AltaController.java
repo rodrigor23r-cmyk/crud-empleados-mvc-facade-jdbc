@@ -61,9 +61,7 @@ public class AltaController extends HttpServlet {
 		request.getRequestDispatcher("views/formularioAltaModificacion.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String nombre = request.getParameter("nombre");
@@ -116,7 +114,8 @@ public class AltaController extends HttpServlet {
 		List<Empleado> empleados = empleadoService.getEmpleados();
 		request.setAttribute("empleados", empleados);
 		
-		request.getRequestDispatcher("views/listadoEmpleados.jsp").forward(request, response);
+		 request.getRequestDispatcher("views/listadoEmpleados.jsp").forward(request, response);
+		// response.sendRedirect("views/listadoEmpleados.jsp");
 	}
 
 }

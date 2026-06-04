@@ -204,9 +204,11 @@ public class DBConexion implements AutoCloseable {
 				+ "WHERE e.id = ?";
 		
 		PreparedStatement stmt = null;
-		
+		// =========== https://www.baeldung.com/jdbc-resultset ========
 		try {
-			stmt = connection.prepareStatement(query);
+			stmt = connection.prepareStatement(query, 
+					ResultSet.TYPE_SCROLL_INSENSITIVE, 
+					ResultSet.CONCUR_UPDATABLE);
 			stmt.setInt(1, idEmpleado);
 			rs = stmt.executeQuery();
 			
