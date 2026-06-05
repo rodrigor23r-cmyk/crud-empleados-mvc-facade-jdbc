@@ -5,7 +5,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.example.models.Departamento;
+import com.example.models.DetallesEmpleado;
 import com.example.models.Empleado;
 import com.example.models.Genero;
 import com.example.services.DepartamentoService;
@@ -22,29 +22,37 @@ import com.example.services.DepartamentoServiceImpl;
 import com.example.services.EmpleadoService;
 import com.example.services.EmpleadoServiceImpl;
 
-/**
- * Servlet implementation class AltaController
- */
-@WebServlet("/AltaController")
-public class AltaController extends HttpServlet {
+
+@WebServlet("/UpdateController")
+public class UpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	private static final Logger LOG = Logger.getLogger("AltaController");
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AltaController() {
+    private static final Logger LOG = Logger.getLogger("UpdateController");
+
+    public UpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
+		LOG.info("ID del empleado: " + idEmpleado);
+		EmpleadoService empleadoServicio = new EmpleadoServiceImpl();
+		empleadoServicio.getDetallesEmpleado(idEmpleado);
 		
-		// Se usa la interfaz como tipo y se instancia la clase implementadora
+		// mostrar la vista de detalles del empleado, con los datos obtenidos del servicio
+		List<Empleado> empleados = empleadoServicio.getEmpleados();
+		
+		Empleado empleado = empleados.stream()
+				.filter(e -> e.id() == idEmpleado)
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException("Empleado no encontrado con id: " + idEmpleado));
+		
+		request.setAttribute("empleado", empleado);
+		DetallesEmpleado detallesEmpleado = empleadoServicio.getDetallesEmpleado(idEmpleado);
+		
+		request.setAttribute("detallesEmpleado", empleadoServicio.getDetallesEmpleado(idEmpleado));
+		
 		DepartamentoService DepartamentoServicio = new DepartamentoServiceImpl();
 		
 		List<Departamento> departamentos = null;
@@ -55,16 +63,15 @@ public class AltaController extends HttpServlet {
 			// TODO: handle exception
 		}
 		
-		
 		request.setAttribute("departamentos", departamentos);
 		
-		request.getRequestDispatcher("views/formularioAltaModificacion.jsp").forward(request, response);
+		request.getRequestDispatcher("views/formularioModificacion.jsp").forward(request, response);
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
 		String nombre = request.getParameter("nombre");
 		String primerApellido = request.getParameter("primerApellido");
 		String segundoApellido = request.getParameter("segundoApellido") == null ? "": request.getParameter("segundoApellido");
@@ -76,20 +83,21 @@ public class AltaController extends HttpServlet {
 		List<String> direccionesCorreo = new ArrayList<>();
 		List<String> numerosTelefono = new ArrayList<>();
 				
-		String cadenaCorreos = request.getParameter("correos") == null ? "": request.getParameter("correos");
-		String cadenaTelefonos = request.getParameter("telefonos") == null ? "": request.getParameter("telefonos");
+		String cadenaCorreos = request.getParameter("correos").equals("") ? null : request.getParameter("correos");
+		String cadenaTelefonos = request.getParameter("telefonos").equals("") ? null : request.getParameter("telefonos");
 		
-		if (cadenaCorreos != "" ) {
+		if (cadenaCorreos != null) {
 		    String[] arrayCorreos = cadenaCorreos.split(";");
 		    direccionesCorreo = Arrays.asList(arrayCorreos);
 		}
 		
-		if (cadenaTelefonos != "" ) {
+		if (cadenaTelefonos != null) {
 		    String[] arrayTelefonos = cadenaTelefonos.split(";");
 		    numerosTelefono =Arrays.asList(arrayTelefonos);		    
 		}
 		
 		Empleado empleado = Empleado.builder()
+				.id(idEmpleado)
 				.nombre(nombre)
 				.primerApellido(primerApellido)
 				.segundoApellido(segundoApellido) 
@@ -105,7 +113,7 @@ public class AltaController extends HttpServlet {
 		EmpleadoService empleadoService = new EmpleadoServiceImpl();
 		
 		try {
-			empleadoService.altaEmpleado(empleado, direccionesCorreo, numerosTelefono);
+			empleadoService.modificarEmpleado(empleado, direccionesCorreo, numerosTelefono);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

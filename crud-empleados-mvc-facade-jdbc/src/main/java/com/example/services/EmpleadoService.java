@@ -17,4 +17,5 @@ public interface EmpleadoService {
 	public abstract List<Empleado> getEmpleados();
 	public abstract void altaEmpleado(Empleado empleado, List<String> direccionesCorreo, List<String> numerosTelefono) throws Exception;
 	public abstract DetallesEmpleado getDetallesEmpleado(int idEmpleado);
+	public abstract void modificarEmpleado(Empleado empleado, List<String> direccionesCorreo, List<String> numerosTelefono) throws Exception;
 }

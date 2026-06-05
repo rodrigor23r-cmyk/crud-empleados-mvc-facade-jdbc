@@ -113,5 +113,20 @@ public class EmpleadoServiceImpl implements EmpleadoService  {
 		
 		return detallesEmpleado;
 	}
+
+
+	@Override
+	public void modificarEmpleado(Empleado empleado, List<String> direccionesCorreo, List<String> numerosTelefono)
+			throws Exception {
+		try (DBConexion dbConexion = new DBConexion("root", "Temp2026");
+				Connection connection = dbConexion.getConexion();) {
+			
+			dbConexion.modificarEmpleado(empleado, direccionesCorreo, numerosTelefono, connection);
+			
+		} catch (Exception e) {
+			LOG.severe("!!error al modificar el empleado desde el servicio!! " + e.getMessage());
+		}
+		
+	}
 	
 }

@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<h1>Formulario de Alta/Modificación de empleado</h1>
+	<h1>Formulario de Alta de empleado</h1>
 	<fieldset class="formulario">
 
 		<legend>Formulario de Gestión de Empleado</legend>

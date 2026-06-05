@@ -7,7 +7,7 @@
 <html>
 <head>
 <style>
-  table {
+table {
     width: 100%;
     border-collapse: collapse; /* Evita que las líneas se vean dobles */
   }
@@ -45,6 +45,7 @@
 				<th>Genero</th>
 				<th>Salario</th>
 				<th>Detalles</th>
+				<th>Borrar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -58,6 +59,7 @@
             <td><%= empleado.genero() %></td>
             <td><%= String.format("%.2f", empleado.salario()) %></td>
             <td><a href="DetallesController?idEmpleado=<%=empleado.id()%>">Detalles</a></td>
+            <td><a href="#" onclick="return confirm('¿Estás seguro de que deseas borrar este empleado?');">Borrar</a></td>
                 </tr>
           <% } %>
           <!--  tr>td{<=empleado.() %>}*6 -->

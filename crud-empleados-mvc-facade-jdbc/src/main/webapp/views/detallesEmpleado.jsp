@@ -20,7 +20,7 @@
 	<p>Fecha de alta: <%=empleado.fechaAlta()%></p>
 	<p>Departamento: <%= detallesEmpleado.nombreDpto() %></p>
 	
-	<p>Salario: <%= empleado.salario() %></p>
+	<p>Salario: <%=String.format("%.2f", empleado.salario()) %></p>
 	
 	
 	<div>
