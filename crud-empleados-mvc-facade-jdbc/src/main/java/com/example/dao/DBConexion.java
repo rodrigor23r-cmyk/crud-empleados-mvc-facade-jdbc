@@ -312,5 +312,47 @@ public class DBConexion implements AutoCloseable {
 		}
 		
 	}
+
+	public void deleteEmpleado(int idEmpleado, Connection connection) throws SQLException {
+
+		String query1 = "DELETE FROM empleados WHERE id = ?";
+		String query2 = "DELETE FROM correos WHERE empleados_id = ?";
+		String query3 = "DELETE FROM telefonos WHERE empleados_id = ?";
+		
+		try {
+			connection.setAutoCommit(false);
+			
+			PreparedStatement stmt2 = connection.prepareStatement(query2);
+			stmt2.setInt(1, idEmpleado);
+			stmt2.executeUpdate();
+			
+			PreparedStatement stmt3 = connection.prepareStatement(query3);
+			stmt3.setInt(1, idEmpleado);
+			stmt3.executeUpdate();
+			
+			PreparedStatement stmt1 = connection.prepareStatement(query1);
+			stmt1.setInt(1, idEmpleado);
+			int totalFilas = stmt1.executeUpdate();
+			
+			if (totalFilas != 0) {
+				LOG.info("Empleado con id " + idEmpleado + " eliminado correctamente");
+			} else {
+				LOG.warning("No se ha encontrado ningún empleado con id " + idEmpleado + " para eliminar");
+			}
+			
+			connection.commit();
+			
+			} catch (Exception e) {
+			LOG.severe("Error en la transacción de eliminación de empleado porque: " + e.getMessage());
+			e.printStackTrace();
+			connection.rollback();
+			LOG.info("Transacción de eliminación de empleado revertida");
+		
+			} finally {
+			connection.setAutoCommit(true);
+			
+			}
+				
+	}
 	
 }

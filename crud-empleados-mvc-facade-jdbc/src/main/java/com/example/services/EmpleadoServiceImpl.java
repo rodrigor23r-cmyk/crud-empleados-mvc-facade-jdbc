@@ -128,5 +128,20 @@ public class EmpleadoServiceImpl implements EmpleadoService  {
 		}
 		
 	}
+
+
+	@Override
+	public void deleteEmpleado(int idEmpleado) {
+
+		try (DBConexion dbConexion = new DBConexion("root", "Temp2026");
+				Connection connection = dbConexion.getConexion();) {
+			
+			dbConexion.deleteEmpleado(idEmpleado, connection);
+			
+		} catch (Exception e) {
+			LOG.severe("!!error al eliminar el empleado desde el servicio!! " + e.getMessage());
+		}
+		
+	}
 	
 }

@@ -35,6 +35,7 @@ public class UpdateController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
 		LOG.info("ID del empleado: " + idEmpleado);
 		EmpleadoService empleadoServicio = new EmpleadoServiceImpl();
