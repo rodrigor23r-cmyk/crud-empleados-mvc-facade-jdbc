@@ -66,8 +66,6 @@ public class EmpleadoServiceImpl implements EmpleadoService  {
 		}
 		
 	}
-
-
 	@Override
 	public DetallesEmpleado getDetallesEmpleado(int idEmpleado) {
 		
@@ -113,7 +111,6 @@ public class EmpleadoServiceImpl implements EmpleadoService  {
 		
 		return detallesEmpleado;
 	}
-
 
 	@Override
 	public void modificarEmpleado(Empleado empleado, List<String> direccionesCorreo, List<String> numerosTelefono)

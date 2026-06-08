@@ -52,7 +52,7 @@ public class UpdateController extends HttpServlet {
 		request.setAttribute("empleado", empleado);
 		DetallesEmpleado detallesEmpleado = empleadoServicio.getDetallesEmpleado(idEmpleado);
 		
-		request.setAttribute("detallesEmpleado", empleadoServicio.getDetallesEmpleado(idEmpleado));
+		request.setAttribute("detallesEmpleado", detallesEmpleado);
 		
 		DepartamentoService DepartamentoServicio = new DepartamentoServiceImpl();
 		
